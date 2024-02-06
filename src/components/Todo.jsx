@@ -43,20 +43,22 @@ export default function Todo() {
     setInput("");
   };
   return (
-    <div className="flex flex-col " id="create">
+    <div className="flex flex-col min-h-screen" id="create">
       <Navbar />
-      <div className="mx-auto py-14 flex gap-5 ">
-        <div className="w-full">
+      <div className="mx-auto py-10 flex flex-col gap-5 ">
+        <p className="text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
+          Add Todo
+        </p>
+        <div className="w-full flex gap-1 sm:gap-2">
           <input
-            className=" w-72 placeholder:italic placeholder:text-slate-400 ring-1 rounded-md py-2 px-2 pr-2 shadow-sm focus:outline-blue-800 ring-slate-700 focus:ring-blue-900 sm:text-sm"
+            className=" sm:w-72 placeholder:italic placeholder:text-slate-400 ring-1 rounded-md p-1 sm:p-2 pr-2 shadow-sm focus:outline-blue-800 ring-slate-700 focus:ring-blue-900 text-sm sm:text-l"
             placeholder="Add a new todo..."
+            required
             type="text"
             name="search"
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-        </div>
-        <div className="text-center my-auto hover:text-blue-800 hover:scale-105 duration-150">
           <button
             className="flex items-center rounded-full"
             onClick={editIndex === -1 ? addTodo : updateTodo}
@@ -66,7 +68,7 @@ export default function Todo() {
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              className="w-8 h-8"
+              className="sm:w-8 sm:h-8 w-6 h-6 hover:text-blue-800 hover:scale-105 duration-150"
               stroke="currentColor"
             >
               <path
@@ -78,8 +80,8 @@ export default function Todo() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col mx-auto w-80">
-        <p className="text-2xl font-bold underline underline-offset-4">
+      <div className="flex flex-col mx-auto  sm:w-80">
+        <p className=" text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
           My Todos
         </p>
         <div className="rounded w-full flex flex-col">
@@ -88,10 +90,10 @@ export default function Todo() {
               todos.map((todo, index) => (
                 <li
                   key={index}
-                  className="flex items-center justify-between py-5 gap-2"
+                  className="flex items-center justify-between py-5 gap-1 sm:gap-2"
                 >
                   <span
-                    className={`text-lg w-60 rounded-md ring-1 ring-slate-900 p-1 ${
+                    className={` text-sm sm:text-lg w-44 sm:w-60 rounded-md ring-1 ring-slate-900 p-1 ${
                       todo.done ? "line-through text-gray-700" : ""
                     }`}
                   >
@@ -103,7 +105,7 @@ export default function Todo() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="rgb(55 65 81)"
-                        className="w-6 h-6 hover:text-blue-800 hover:scale-105 duration-150"
+                        className="h-5 w-5 sm:w-6 sm:h-6 hover:text-blue-800 hover:scale-105 duration-150"
                         onClick={() => setToggle(todo.id)}
                       >
                         <path
@@ -121,7 +123,7 @@ export default function Todo() {
                         stroke="currentColor"
                         onClick={() => setToggle(todo.id)}
                         className={
-                          "w-6 h-6 hover:text-blue-800 hover:scale-105 duration-150"
+                          " h-5 w-5 sm:w-6 sm:h-6 hover:text-blue-800 hover:scale-105 duration-150"
                         }
                       >
                         <path
@@ -139,7 +141,7 @@ export default function Todo() {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 hover:text-blue-800 hover:scale-105 duration-150"
+                      className="h-5 w-5 sm:w-6 sm:h-6 hover:text-blue-800 hover:scale-105 duration-150"
                       onClick={() => setEdit(index)}
                     >
                       <path
@@ -156,7 +158,7 @@ export default function Todo() {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-6 h-6 hover:text-red-700 hover:scale-105 duration-150"
+                      className="h-5 w-5 sm:w-6 sm:h-6 hover:text-red-700 hover:scale-105 duration-150"
                       onClick={() => deleteTodo(todo.id)}
                     >
                       <path

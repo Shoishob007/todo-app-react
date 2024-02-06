@@ -51,9 +51,12 @@ export default function Note() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="inputBox border border-blue-950 rounded-lg h-44 mx-auto flex flex-col shadow-xl justify-center w-96">
+      <p className="pb-4 text-xl sm:text-2xl mx-auto font-bold underline underline-offset-4">
+        Add Your Note
+      </p>
+      <div className="inputBox border border-blue-950 rounded-lg h-44 mx-auto flex flex-col shadow-xl justify-center w-64 sm:w-96">
         <input
           type="text"
           className="border-b-2 border-b-emerald-300 border-dashed p-2 outline-none placeholder:font-semibold placeholder:italic placeholder:text-slate-400 "
@@ -69,26 +72,26 @@ export default function Note() {
         ></textarea>
         {editIndex === -1 ? (
           <button
-            className=" w-24 h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-md mx-auto "
+            className=" w-20 sm:w-24 h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-normal sm:font-md mx-auto "
             onClick={addNote}
           >
             Save
           </button>
         ) : (
           <button
-            className=" w-24 h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-md mx-auto "
+            className=" w-20 sm:w-24 h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-normal sm:font-md mx-auto "
             onClick={updateNote}
           >
             Save Edits
           </button>
         )}
       </div>
-      <div className="mx-10 text-2xl font-medium">
-        <h1 className="p-4 text-2xl font-bold underline underline-offset-4">
+      <div className="flex flex-col font-medium p-2 sm:p-5">
+        <p className=" px-14 py-2 text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
           My Notes
-        </h1>
-        <div className=" p-4 mx-auto">
-          <ul className=" flex flex-wrap gap-8">
+        </p>
+        <div className="p-4 ">
+          <ul className=" flex flex-wrap justify-start items-center gap-8">
             {notes.length > 0 ? (
               notes.map((note, index) => (
                 <li key={index}>
@@ -100,13 +103,15 @@ export default function Note() {
                         note.done ? "bg-emerald-100" : ""
                       }`}
                     >
-                      <p className="text-slate-600 text-base">{note.title}</p>
+                      <p className="text-slate-600 sm:text-base">
+                        {note.title}
+                      </p>
                       {note.done ? (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
                           fill="rgb(42, 170, 138)"
-                          className=" w-6 h-6 hover:text-blue-900 hover:scale-105 duration-150"
+                          className="w-5 h-5 sm:w-6 sm:h-6 hover:text-blue-900 hover:scale-105 duration-150"
                           onClick={() => toggleNote(note.id)}
                         >
                           <path
@@ -122,7 +127,7 @@ export default function Note() {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-5 h-5 hover:text-blue-800 hover:scale-105 duration-150"
+                          className="w-4 h-4 sm:w-5 sm:h-5 hover:text-blue-800 hover:scale-105 duration-150"
                           onClick={() => toggleNote(note.id)}
                         >
                           <path
@@ -134,7 +139,7 @@ export default function Note() {
                       )}
                     </span>
                     <span className="flex-grow p-2 ">
-                      <p className="text-slate-600 text-start text-base">
+                      <p className="text-slate-600 text-start sm:text-base">
                         {note.description}
                       </p>
                     </span>
@@ -148,7 +153,7 @@ export default function Note() {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-5 h-5 hover:text-blue-800 hover:scale-105 duration-150"
+                        className="w-4 h-4 sm:w-5 sm:h-5 hover:text-blue-800 hover:scale-105 duration-150"
                         onClick={() => editNote(index)}
                       >
                         <path
@@ -163,7 +168,7 @@ export default function Note() {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-5 h-5 hover:text-red-700 hover:scale-105 duration-150"
+                        className="w-4 h-4 sm:w-5 sm:h-5 hover:text-red-700 hover:scale-105 duration-150"
                         onClick={() => deleteNote(note.id)}
                       >
                         <path
@@ -177,8 +182,8 @@ export default function Note() {
                 </li>
               ))
             ) : (
-              <div className="">
-                <p className=" text-lg text-emerald-700 font-semibold">
+              <div className="mx-auto">
+                <p className="text-lg text-emerald-700 font-medium sm:font-semibold">
                   No Notes Yet!
                 </p>
               </div>
