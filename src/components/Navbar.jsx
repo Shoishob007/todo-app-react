@@ -10,7 +10,11 @@ function Navbar() {
           className="my-auto text-center cursor-pointer hover:scale-105 duration-200"
           onClick={() => navigate("/")}
         >
-          <img className="max-h-16 w-16 " src="./images/Logo.png" alt="Logo" />
+          <img
+            className="max-h-16 w-16 "
+            src="./../images/logo.png"
+            alt="Logo"
+          />
         </section>
         <ul className="my-auto items-center flex justify-between gap-2 sm:gap-6 cursor-pointer text-gray-800 font-bold shadow-sm">
           <li className="hover:scale-105 hover:text-bold hover:text-blue-900 duration-100">

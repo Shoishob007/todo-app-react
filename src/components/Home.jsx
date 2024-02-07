@@ -9,10 +9,10 @@ function Home() {
       <div className="flex flex-col" id="home">
         <Navbar />
 
-        <div className="sm:gap-0 sm:flex items-center justify-evenly">
+        <div className="pt-8 sm:pt-14 sm:gap-0 sm:flex items-center justify-evenly">
           <div className="items-center ">
             <img
-              src="./images/Hero.png"
+              src="./../images/Hero.png"
               alt="Hero"
               className=" mx-auto  h-60 w-60 sm:h-80 sm:w-80"
             />
