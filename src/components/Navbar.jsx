@@ -12,7 +12,7 @@ function Navbar() {
         >
           <img
             className="max-h-16 w-16 "
-            src="./../images/logo.png"
+            src="./../assets/logo.png"
             alt="Logo"
           />
         </section>
