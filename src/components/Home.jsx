@@ -2,6 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
+import HeroImage from "../../images/Hero.png";
 
 function Home() {
   return (
@@ -12,7 +13,7 @@ function Home() {
         <div className="pt-8 sm:pt-14 sm:gap-0 sm:flex items-center justify-evenly">
           <div className="items-center ">
             <img
-              src="./../assets/Hero.png"
+              src={HeroImage}
               alt="Hero"
               className=" mx-auto  h-60 w-60 sm:h-80 sm:w-80"
             />

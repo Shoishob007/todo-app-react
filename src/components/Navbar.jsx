@@ -1,5 +1,6 @@
 // Navbar.jsx
 import { Link, useNavigate } from "react-router-dom";
+import logoImage from "../../images/Logo.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -10,11 +11,7 @@ function Navbar() {
           className="my-auto text-center cursor-pointer hover:scale-105 duration-200"
           onClick={() => navigate("/")}
         >
-          <img
-            className="max-h-16 w-16 "
-            src="./../assets/logo.png"
-            alt="Logo"
-          />
+          <img className="max-h-16 w-16 " src={logoImage} alt="Logo" />
         </section>
         <ul className="my-auto items-center flex justify-between gap-2 sm:gap-6 cursor-pointer text-gray-800 font-bold shadow-sm">
           <li className="hover:scale-105 hover:text-bold hover:text-blue-900 duration-100">
