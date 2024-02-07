@@ -62,30 +62,30 @@ export default function Note() {
       <p className="pb-4 text-xl sm:text-2xl mx-auto font-bold underline underline-offset-4">
         Add Your Note
       </p>
-      <div className="inputBox border border-blue-950 rounded-lg h-44 mx-auto flex flex-col shadow-xl justify-evenly w-64 sm:w-96">
+      <div className="inputBox border border-blue-950 rounded-lg h-40 sm:h-44 mx-auto flex flex-col shadow-xl justify-evenly w-52 sm:w-96">
         <input
           type="text"
-          className="p-2 border-b-2 border-b-emerald-300 border-dashed outline-none placeholder:font-semibold placeholder:italic placeholder:text-slate-400 "
+          className="p-2 border-b-2 border-b-emerald-300 rounded-lg border-dashed outline-none placeholder:font-semibold placeholder:italic placeholder:text-slate-400 "
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <textarea
-          className="p-2 placeholder:font-medium h-20 resize-none outline-none placeholder:italic placeholder:text-slate-400"
+          className="p-2 placeholder:font-medium h-16 sm:h-20 resize-none outline-none placeholder:italic placeholder:text-slate-400"
           placeholder="Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
         {editIndex === -1 ? (
           <button
-            className=" w-20 sm:w-24 h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-normal sm:font-md mx-auto "
+            className=" w-16 sm:w-24 h-7 sm:h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-light sm:font-md mx-auto "
             onClick={addNote}
           >
             Save
           </button>
         ) : (
           <button
-            className=" w-20 sm:w-24 h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-normal sm:font-md mx-auto "
+            className="w-16 sm:w-24 h-7 sm:h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-light sm:font-md mx-auto "
             onClick={updateNote}
           >
             Save Edits
@@ -97,12 +97,12 @@ export default function Note() {
           My Notes
         </p>
         <div className="py-4 px-6 mx-auto">
-          <ul className=" flex flex-wrap justify-center items-center gap-8">
+          <ul className=" flex flex-wrap justify-center items-center gap-4 sm:gap-8">
             {notes.length > 0 ? (
               notes.map((note, index) => (
                 <li key={index}>
                   <div
-                    className={`h-40 w-64 border-2 border-gray-900 flex flex-col rounded-md `}
+                    className={`h-36 sm:h-44 w-48 sm:w-64 border-2 border-gray-900 flex flex-col rounded-md `}
                   >
                     <span
                       className={`flex justify-between text-center rounded-md overflow-hidden p-2 border-b-emerald-400 border-b ${

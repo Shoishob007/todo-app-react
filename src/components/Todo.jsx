@@ -52,7 +52,7 @@ export default function Todo() {
   return (
     <div className="flex flex-col min-h-screen" id="create">
       <Navbar />
-      <div className="mx-auto py-10 flex flex-col gap-5 ">
+      <div className="mx-auto py-14 sm:py-10 flex flex-col gap-5 ">
         <p className="text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
           Add Todo
         </p>
@@ -87,7 +87,7 @@ export default function Todo() {
           </button>
         </div>
       </div>
-      <div className="flex flex-col mx-auto  sm:w-80">
+      <div className="flex flex-col mx-auto sm:w-80">
         <p className=" text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
           My Todos
         </p>
