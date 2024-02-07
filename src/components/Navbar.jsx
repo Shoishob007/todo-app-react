@@ -1,6 +1,6 @@
 // Navbar.jsx
 import { Link, useNavigate } from "react-router-dom";
-import logoImage from "../../images/Logo.png";
+import logoImage from "../../images/Logo.svg";
 
 function Navbar() {
   const navigate = useNavigate();

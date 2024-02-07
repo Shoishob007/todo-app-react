@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
-import HeroImage from "../../images/Hero.png";
+import HeroImage from "../../images/Todo.svg";
 
 function Home() {
   return (
