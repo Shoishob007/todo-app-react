@@ -5,7 +5,7 @@ function Navbar() {
   const navigate = useNavigate();
   return (
     <div className="">
-      <nav className=" bg-gradient-to-r from-emerald-100 to-emerald-100 via-gray-50 flex sticky justify-around gap-3 sm:gap-20 rounded-md mx-auto mt-10 mb-5 sm:my-10 p-2 text-center max-w-screen-lg h-15 ring-1 ring-gray-900 shadow-md overflow-hidden">
+      <nav className=" bg-gradient-to-r from-emerald-100 to-emerald-100 via-gray-50 flex sticky justify-around gap-3 sm:gap-20 rounded-md mx-auto my-5 sm:my-5  p-2 text-center max-w-screen-lg h-15 ring-1 ring-gray-900 shadow-md overflow-hidden">
         <section
           className="my-auto text-center cursor-pointer hover:scale-105 duration-200"
           onClick={() => navigate("/")}

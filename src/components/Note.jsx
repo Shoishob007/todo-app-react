@@ -1,11 +1,13 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 
 export default function Note() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState(
+    JSON.parse(localStorage.getItem("notes")) || []
+  );
   const [editIndex, setEditIndex] = useState(-1);
 
   const addNote = () => {
@@ -50,16 +52,20 @@ export default function Note() {
     setDescription("");
   };
 
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <p className="pb-4 text-xl sm:text-2xl mx-auto font-bold underline underline-offset-4">
         Add Your Note
       </p>
-      <div className="inputBox border border-blue-950 rounded-lg h-44 mx-auto flex flex-col shadow-xl justify-center w-64 sm:w-96">
+      <div className="inputBox border border-blue-950 rounded-lg h-44 mx-auto flex flex-col shadow-xl justify-evenly w-64 sm:w-96">
         <input
           type="text"
-          className="border-b-2 border-b-emerald-300 border-dashed p-2 outline-none placeholder:font-semibold placeholder:italic placeholder:text-slate-400 "
+          className="p-2 border-b-2 border-b-emerald-300 border-dashed outline-none placeholder:font-semibold placeholder:italic placeholder:text-slate-400 "
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -86,12 +92,12 @@ export default function Note() {
           </button>
         )}
       </div>
-      <div className="flex flex-col font-medium p-2 sm:p-5">
-        <p className=" px-14 py-2 text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
+      <div className="flex flex-col font-medium p-2 sm:p-4">
+        <p className="py-2 text-xl sm:text-2xl mx-auto  font-bold underline underline-offset-4">
           My Notes
         </p>
-        <div className="p-4 ">
-          <ul className=" flex flex-wrap justify-start items-center gap-8">
+        <div className="py-4 px-6 mx-auto">
+          <ul className=" flex flex-wrap justify-center items-center gap-8">
             {notes.length > 0 ? (
               notes.map((note, index) => (
                 <li key={index}>
@@ -127,7 +133,7 @@ export default function Note() {
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="w-4 h-4 sm:w-5 sm:h-5 hover:text-blue-800 hover:scale-105 duration-150"
+                          className="w-5 h-5 sm:w-6 sm:h-6 hover:text-blue-800 hover:scale-105 duration-150"
                           onClick={() => toggleNote(note.id)}
                         >
                           <path

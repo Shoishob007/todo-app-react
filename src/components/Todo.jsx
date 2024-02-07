@@ -1,10 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 
 export default function Todo() {
   const [input, setInput] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(
+    JSON.parse(localStorage.getItem("todos")) || []
+  );
   const [editIndex, setEditIndex] = useState(-1);
 
   const addTodo = () => {
@@ -42,6 +44,11 @@ export default function Todo() {
     setTodos(filteredTodo);
     setInput("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <div className="flex flex-col min-h-screen" id="create">
       <Navbar />
