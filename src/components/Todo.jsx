@@ -50,15 +50,15 @@ export default function Todo() {
   }, [todos]);
 
   return (
-    <div className="flex flex-col min-h-screen" id="create">
+    <div className="flex flex-col min-h-screen gap-16 md:gap-8" id="create">
       <Navbar />
       <div className="mx-auto py-14 sm:py-10 flex flex-col gap-5 ">
         <p className="text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
           Add Todo
         </p>
-        <div className="w-full flex gap-1 sm:gap-2">
+        <div className="w-full flex gap-2 sm:gap-3">
           <input
-            className=" sm:w-72 placeholder:italic placeholder:text-slate-400 ring-1 rounded-md p-1 sm:p-2 pr-2 shadow-sm focus:outline-blue-800 ring-slate-700 focus:ring-blue-900 text-sm sm:text-l"
+            className="w-52 sm:w-72 placeholder:italic placeholder:text-slate-400 ring-1 rounded-md p-1 sm:p-2 pr-2 shadow-sm focus:outline-blue-800 ring-slate-700 focus:ring-blue-900 text-sm sm:text-lg"
             placeholder="Add a new todo..."
             required
             type="text"

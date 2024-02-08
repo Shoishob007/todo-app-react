@@ -62,7 +62,7 @@ export default function Note() {
       <p className="pb-4 text-xl sm:text-2xl mx-auto font-bold underline underline-offset-4">
         Add Your Note
       </p>
-      <div className="inputBox border border-blue-950 rounded-lg h-40 sm:h-44 mx-auto flex flex-col shadow-xl justify-evenly w-52 sm:w-96">
+      <div className="inputBox border border-blue-950 rounded-lg h-40 sm:h-44  w-52 sm:w-96 mx-auto flex flex-col shadow-xl justify-evenly">
         <input
           type="text"
           className="p-2 border-b-2 border-b-emerald-300 rounded-lg border-dashed outline-none placeholder:font-semibold placeholder:italic placeholder:text-slate-400 "
@@ -102,7 +102,7 @@ export default function Note() {
               notes.map((note, index) => (
                 <li key={index}>
                   <div
-                    className={`h-36 sm:h-44 w-48 sm:w-64 border-2 border-gray-900 flex flex-col rounded-md `}
+                    className={`h-36 sm:h-40 w-48 sm:w-64 border-2 border-gray-900 flex flex-col rounded-md `}
                   >
                     <span
                       className={`flex justify-between text-center rounded-md overflow-hidden p-2 border-b-emerald-400 border-b ${
