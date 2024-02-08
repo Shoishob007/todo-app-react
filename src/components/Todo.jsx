@@ -50,7 +50,7 @@ export default function Todo() {
   }, [todos]);
 
   return (
-    <div className="flex flex-col min-h-screen gap-16 md:gap-8" id="create">
+    <div className="flex flex-col min-h-screen gap-10 md:gap-8" id="create">
       <Navbar />
       <div className="mx-auto py-14 sm:py-10 flex flex-col gap-5 ">
         <p className="text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
