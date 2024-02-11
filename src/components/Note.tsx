@@ -1,14 +1,21 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 
-export default function Note() {
+interface Note {
+  id: number;
+  title: string;
+  description: string;
+  done?: boolean;
+}
+
+export default function Note() : JSX.Element {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [notes, setNotes] = useState(
-    JSON.parse(localStorage.getItem("notes")) || []
+  const [notes, setNotes] = useState<Note[]>(
+    JSON.parse(localStorage.getItem("notes") || "[]")
   );
-  const [editIndex, setEditIndex] = useState(-1);
+  const [editIndex, setEditIndex] = useState<number>(-1);
 
   const addNote = () => {
     if (title != "" && description != "") {
@@ -21,7 +28,7 @@ export default function Note() {
     }
   };
 
-  const editNote = (index) => {
+  const editNote = (index : number) => {
     setTitle(notes[index].title);
     setDescription(notes[index].description);
     setEditIndex(index);
@@ -37,7 +44,7 @@ export default function Note() {
     setDescription("");
   };
 
-  const toggleNote = (id) => {
+  const toggleNote = (id : number) => {
     setNotes((prev) =>
       prev.map((note) =>
         note.id === id ? { ...note, done: !note.done } : note
@@ -45,7 +52,7 @@ export default function Note() {
     );
   };
 
-  const deleteNote = (id) => {
+  const deleteNote = (id : number) => {
     const filteredNotes = notes.filter((item) => item.id !== id);
     setNotes(filteredNotes);
     setTitle("");

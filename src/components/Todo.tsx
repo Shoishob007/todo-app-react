@@ -1,13 +1,19 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
+
+interface Note {
+  id: number;
+  todo: string;
+  done?: boolean;
+}
 
 export default function Todo() {
   const [input, setInput] = useState("");
-  const [todos, setTodos] = useState(
-    JSON.parse(localStorage.getItem("todos")) || []
+  const [todos, setTodos] = useState<Note[]>(
+    JSON.parse(localStorage.getItem("todos") || "[]")
   );
-  const [editIndex, setEditIndex] = useState(-1);
+  const [editIndex, setEditIndex] = useState<number>(-1);
 
   const addTodo = () => {
     if (input != "") {
@@ -16,7 +22,7 @@ export default function Todo() {
     }
   };
 
-  const setToggle = (id) => {
+  const setToggle = (id : number) => {
     console.log(id);
     setTodos((previous) =>
       previous.map((todo) =>
@@ -25,7 +31,7 @@ export default function Todo() {
     );
   };
 
-  const setEdit = (index) => {
+  const setEdit = (index : number) => {
     console.log(index);
     setInput(todos[index].todo);
     setEditIndex(index);
@@ -39,7 +45,7 @@ export default function Todo() {
     setInput("");
   };
 
-  const deleteTodo = (id) => {
+  const deleteTodo = (id : number) => {
     const filteredTodo = todos.filter((item) => item.id !== id);
     setTodos(filteredTodo);
     setInput("");
