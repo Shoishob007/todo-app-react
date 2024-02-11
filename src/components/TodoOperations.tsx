@@ -1,110 +1,19 @@
-// eslint-disable-next-line no-unused-vars
-import { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import React from "react";
+import { Todos } from "../pages/Todo"
 
-interface Note {
-  id: number;
-  todo: string;
-  done?: boolean;
+interface TodooperationProps{
+    todo: Todos;
+    index: number;
+    setToggle: (id: number) => void;
+    setEdit: (index: number) => void;
+    deleteTodo: (id: number) => void;
 }
 
-export default function Todo() {
-  const [input, setInput] = useState("");
-  const [todos, setTodos] = useState<Note[]>(
-    JSON.parse(localStorage.getItem("todos") || "[]")
-  );
-  const [editIndex, setEditIndex] = useState<number>(-1);
 
-  const addTodo = () => {
-    if (input != "") {
-      setTodos([...todos, { id: Math.random(), todo: input }]);
-      setInput("");
-    }
-  };
+const TodoOperations: React.FC<TodooperationProps> = ({ todo, index, setToggle, setEdit, deleteTodo }) => {
 
-  const setToggle = (id : number) => {
-    console.log(id);
-    setTodos((previous) =>
-      previous.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
-    );
-  };
-
-  const setEdit = (index : number) => {
-    console.log(index);
-    setInput(todos[index].todo);
-    setEditIndex(index);
-  };
-
-  const updateTodo = () => {
-    const updatedTodos = [...todos];
-    updatedTodos[editIndex].todo = input;
-    setTodos(updatedTodos);
-    setEditIndex(-1);
-    setInput("");
-  };
-
-  const deleteTodo = (id : number) => {
-    const filteredTodo = todos.filter((item) => item.id !== id);
-    setTodos(filteredTodo);
-    setInput("");
-  };
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  return (
-    <div className="flex flex-col min-h-screen gap-10 md:gap-8" id="create">
-      <Navbar />
-      <div className="mx-auto py-14 sm:py-10 flex flex-col gap-5 ">
-        <p className="text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
-          Add Todo
-        </p>
-        <div className="w-full flex gap-2 sm:gap-3">
-          <input
-            className="w-52 sm:w-72 placeholder:italic placeholder:text-slate-400 ring-1 rounded-md p-1 sm:p-2 pr-2 shadow-sm focus:outline-blue-800 ring-slate-700 focus:ring-blue-900 text-sm sm:text-lg"
-            placeholder="Add a new todo..."
-            required
-            type="text"
-            name="search"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <button
-            className="flex items-center rounded-full"
-            onClick={editIndex === -1 ? addTodo : updateTodo}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              className="sm:w-8 sm:h-8 w-6 h-6 hover:text-blue-800 hover:scale-105 duration-150"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div className="flex flex-col mx-auto sm:w-80">
-        <p className=" text-xl sm:text-2xl mx-auto sm:mx-0 font-bold underline underline-offset-4">
-          My Todos
-        </p>
-        <div className="rounded w-full flex flex-col">
-          <ul>
-            {todos.length > 0 ? (
-              todos.map((todo, index) => (
-                <li
-                  key={index}
-                  className="flex items-center justify-between py-5 gap-1 sm:gap-2"
-                >
+    return (
+        <li className="flex items-center justify-between py-5 gap-1 sm:gap-2">
                   <span
                     className={` text-sm sm:text-lg w-44 sm:w-60 rounded-md ring-1 ring-slate-900 p-1 ${
                       todo.done ? "line-through text-gray-700" : ""
@@ -156,7 +65,7 @@ export default function Todo() {
                       stroke="currentColor"
                       className="h-5 w-5 sm:w-6 sm:h-6 hover:text-blue-800 hover:scale-105 duration-150"
                       onClick={() => setEdit(index)}
-                    >
+                      >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -182,17 +91,7 @@ export default function Todo() {
                     </svg>
                   </div>
                 </li>
-              ))
-            ) : (
-              <div className="py-5">
-                <p className=" text-lg text-emerald-700 font-semibold">
-                  No Todos Yet!
-                </p>
-              </div>
-            )}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
+    )
 }
+
+export default TodoOperations;

@@ -1,113 +1,18 @@
-// eslint-disable-next-line no-unused-vars
-import { useEffect, useState } from "react";
-import Navbar from "./Navbar";
+import React from "react";
+import { Notes } from '../pages/Note';
 
-interface Note {
-  id: number;
-  title: string;
-  description: string;
-  done?: boolean;
+
+interface NoteOperations {
+    note: Notes;
+    index: number;
+    toggleNote: (id: number) => void;
+    editNote: (index: number) => void;
+    deleteNote: (id: number) => void;
 }
 
-export default function Note() : JSX.Element {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [notes, setNotes] = useState<Note[]>(
-    JSON.parse(localStorage.getItem("notes") || "[]")
-  );
-  const [editIndex, setEditIndex] = useState<number>(-1);
-
-  const addNote = () => {
-    if (title != "" && description != "") {
-      setNotes([
-        ...notes,
-        { id: Date.now(), title: title, description: description },
-      ]);
-      setTitle("");
-      setDescription("");
-    }
-  };
-
-  const editNote = (index : number) => {
-    setTitle(notes[index].title);
-    setDescription(notes[index].description);
-    setEditIndex(index);
-  };
-
-  const updateNote = () => {
-    const updatedNotes = [...notes];
-    updatedNotes[editIndex].title = title;
-    updatedNotes[editIndex].description = description;
-    setNotes(updatedNotes);
-    setEditIndex(-1);
-    setTitle("");
-    setDescription("");
-  };
-
-  const toggleNote = (id : number) => {
-    setNotes((prev) =>
-      prev.map((note) =>
-        note.id === id ? { ...note, done: !note.done } : note
-      )
-    );
-  };
-
-  const deleteNote = (id : number) => {
-    const filteredNotes = notes.filter((item) => item.id !== id);
-    setNotes(filteredNotes);
-    setTitle("");
-    setDescription("");
-  };
-
-  useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
-
-  return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <p className="pb-4 text-xl sm:text-2xl mx-auto font-bold underline underline-offset-4">
-        Add Your Note
-      </p>
-      <div className="inputBox border border-blue-950 rounded-lg h-40 sm:h-44  w-52 sm:w-96 mx-auto flex flex-col shadow-xl justify-evenly">
-        <input
-          type="text"
-          className="p-2 border-b-2 border-b-emerald-300 rounded-lg border-dashed outline-none placeholder:font-semibold placeholder:italic placeholder:text-slate-400 "
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <textarea
-          className="p-2 placeholder:font-medium h-16 sm:h-20 resize-none outline-none placeholder:italic placeholder:text-slate-400"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-        {editIndex === -1 ? (
-          <button
-            className=" w-16 sm:w-24 h-7 sm:h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-light sm:font-md mx-auto "
-            onClick={addNote}
-          >
-            Save
-          </button>
-        ) : (
-          <button
-            className="w-16 sm:w-24 h-7 sm:h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-light sm:font-md mx-auto "
-            onClick={updateNote}
-          >
-            Save Edits
-          </button>
-        )}
-      </div>
-      <div className="flex flex-col font-medium p-2 sm:p-4">
-        <p className="py-2 text-xl sm:text-2xl mx-auto  font-bold underline underline-offset-4">
-          My Notes
-        </p>
-        <div className="py-4 px-6 mx-auto">
-          <ul className=" flex flex-wrap justify-center items-center gap-4 sm:gap-8">
-            {notes.length > 0 ? (
-              notes.map((note, index) => (
-                <li key={index}>
+const NoteOperations : React.FC<NoteOperations> = ({note, index, toggleNote, editNote, deleteNote }) => {
+    return (
+        <li key={index}>
                   <div
                     className={`h-36 sm:h-40 w-48 sm:w-64 border-2 border-gray-900 flex flex-col rounded-md `}
                   >
@@ -193,17 +98,7 @@ export default function Note() : JSX.Element {
                     </span>
                   </div>
                 </li>
-              ))
-            ) : (
-              <div className="mx-auto">
-                <p className="text-lg text-emerald-700 font-medium sm:font-semibold">
-                  No Notes Yet!
-                </p>
-              </div>
-            )}
-          </ul>
-        </div>
-      </div>
-    </div>
-  );
-}
+        )
+    }
+
+    export default NoteOperations;

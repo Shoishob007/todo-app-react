@@ -1,8 +1,8 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import Todo from "./components/Todo";
-import Note from "./components/Note";
+import Todo from "./pages/Todo";
+import Note from "./pages/Note";
 import Footer from "./components/Footer";
 import "./index.css";
 
