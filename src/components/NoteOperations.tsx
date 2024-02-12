@@ -27,7 +27,7 @@ const NoteOperations: React.FC<NoteOperations> = ({
         <span
           className={`flex justify-between text-center rounded-md overflow-hidden p-2 border-b-emerald-400 dark:border-b-emerald-600 border-b ${
             darkMode && note.done
-              ? "bg-emerald-800"
+              ? "bg-emerald-400"
               : !darkMode && note.done
               ? "bg-emerald-200"
               : ""

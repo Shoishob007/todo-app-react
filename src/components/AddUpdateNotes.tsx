@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useTheme } from "./ThemeContext";
 
 interface AddUpdateNoteProps {
   onAddNote: (title: string, description: string) => void;
@@ -18,7 +17,6 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
 }) => {
   const [title, setTitle] = useState<string>(initialTitle);
   const [description, setDescription] = useState<string>(initialDescription);
-  const { darkMode } = useTheme();
 
   useEffect(() => {
     setTitle(initialTitle);
