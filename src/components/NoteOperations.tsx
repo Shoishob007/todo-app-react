@@ -27,7 +27,7 @@ const NoteOperations: React.FC<NoteOperations> = ({
         <span
           className={`flex justify-between text-center rounded-md overflow-hidden p-2 border-b-emerald-400 dark:border-b-emerald-600 border-b ${
             darkMode && note.done
-              ? "bg-emerald-400"
+              ? "bg-teal-700"
               : !darkMode && note.done
               ? "bg-emerald-200"
               : ""
@@ -40,7 +40,7 @@ const NoteOperations: React.FC<NoteOperations> = ({
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
-              fill="rgb(42, 170, 138)"
+              fill="rgb(18, 95, 75)"
               className={`sm:w-6 sm:h-6 w-5 h-5 hover:text-blue-800 hover:scale-105 duration-150 ${
                 darkMode ? "text-slate-400" : "text-black"
               }`}
