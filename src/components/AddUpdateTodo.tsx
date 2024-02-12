@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "./ThemeContext";
 
 interface AddUpdateTodoProps {
   onAddTodo: (todo: string) => void;
@@ -13,9 +14,8 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
   editIndex,
   input,
 }) => {
-
   const [value, setValue] = useState<string>(input);
-
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     setValue(input);
@@ -28,7 +28,6 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
   const handleButtonClick = () => {
     if (editIndex === -1) {
       onAddTodo(value);
-      
     } else {
       onUpdateTodo(value);
     }
@@ -37,7 +36,7 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
   return (
     <div className="w-full flex gap-2 sm:gap-3">
       <input
-        className="w-52 sm:w-72 placeholder:italic placeholder:text-slate-400 ring-1 rounded-md p-1 sm:p-2 pr-2 shadow-sm focus:outline-blue-800 ring-slate-700 focus:ring-blue-900 text-sm sm:text-lg"
+        className="w-52 sm:w-72 placeholder:italic placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 ring-1 rounded-md p-1 sm:p-2 pr-2 shadow-sm focus:outline-blue-800 ring-slate-700 dark:focus:outline-blue-400 text-sm dark:text-slate-200 sm:text-lg"
         placeholder="Add a new todo..."
         required
         type="text"
@@ -54,7 +53,9 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          className="sm:w-8 sm:h-8 w-6 h-6 hover:text-blue-800 hover:scale-105 duration-150"
+          className={`sm:w-8 sm:h-8 w-6 h-6 hover:text-blue-800 hover:scale-105 duration-150 ${
+            darkMode ? "text-slate-400" : "text-black"
+          }`}
           stroke="currentColor"
         >
           <path

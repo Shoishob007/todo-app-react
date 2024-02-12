@@ -4,18 +4,21 @@ import Home from "./components/Home";
 import Todo from "./pages/Todo";
 import Note from "./pages/Note";
 import Footer from "./components/Footer";
+import { ThemeProvider } from "./components/ThemeContext";
 import "./index.css";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/"  Component={Home}></Route>
-        <Route path="/todo" Component={Todo}></Route>
-        <Route path="/note" Component={Note}></Route>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" Component={Home}></Route>
+          <Route path="/todo" Component={Todo}></Route>
+          <Route path="/note" Component={Note}></Route>
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
