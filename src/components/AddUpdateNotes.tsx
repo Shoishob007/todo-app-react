@@ -36,13 +36,11 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
   const handleAddButtonClick = () => {
     if (editIndex === -1) {
       onAddNote(title, description);
-      setTitle("");
-      setDescription("");
     } else {
       onUpdateNote(title, description);
-      setTitle("");
-      setDescription("");
     }
+    setTitle("");
+    setDescription("");
   };
 
   return (

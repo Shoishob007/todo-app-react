@@ -31,6 +31,7 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
     } else {
       onUpdateTodo(value);
     }
+    setValue("");
   };
 
   return (

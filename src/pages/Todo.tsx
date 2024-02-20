@@ -30,8 +30,6 @@ export default function Todo() {
   const addTodo = (value: string) => {
     if (value != "") {
       setTodos([...todos, { id: Math.random(), todo: value }]);
-      console.log(todos);
-      setInput("");
     }
   };
 
@@ -65,6 +63,7 @@ export default function Todo() {
 
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
+    setInput("");
   }, [todos]);
 
   return (
