@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Notes } from "../pages/Note";
 import { useTheme } from "./ThemeContext";
 
-interface NoteOperations {
+interface SaveDeleteNotesProps {
   note: Notes;
   notes: Notes[];
   setNotes: React.Dispatch<React.SetStateAction<Notes[]>>;
@@ -10,7 +10,7 @@ interface NoteOperations {
   setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const NoteOperations: React.FC<NoteOperations> = ({
+const SaveDeleteNotes: React.FC<SaveDeleteNotesProps> = ({
   note,
   notes,
   index,
@@ -151,4 +151,4 @@ const NoteOperations: React.FC<NoteOperations> = ({
   );
 };
 
-export default NoteOperations;
+export default SaveDeleteNotes;

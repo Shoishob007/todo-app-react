@@ -2,7 +2,7 @@ import React from "react";
 import { Todos } from "../pages/Todo";
 import { useTheme } from "./ThemeContext";
 
-interface TodoOperationProps {
+interface SaveAndDeleteTodoProps {
   todo: Todos;
   index: number;
   todos: Todos[];
@@ -10,11 +10,11 @@ interface TodoOperationProps {
   setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const TodoOperations: React.FC<TodoOperationProps> = ({
+const SaveAndDeleteTodo: React.FC<SaveAndDeleteTodoProps> = ({
   todo,
   index,
   setTodos,
-  setEditIndex
+  setEditIndex,
 }) => {
   const { darkMode } = useTheme();
 
@@ -122,4 +122,4 @@ const TodoOperations: React.FC<TodoOperationProps> = ({
   );
 };
 
-export default TodoOperations;
+export default SaveAndDeleteTodo;

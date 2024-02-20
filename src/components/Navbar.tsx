@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/Logo.svg";
 import { useTheme } from "./ThemeContext";
 import { useEffect } from "react";
+import { navTitles } from "./NavItems";
 
 function Navbar() {
   const { darkMode } = useTheme();
@@ -26,15 +27,14 @@ function Navbar() {
           <img className="max-h-16 w-16 " src={logoImage} alt="Logo" />
         </section>
         <ul className="my-auto items-center flex justify-between gap-2 sm:gap-6 cursor-pointer text-gray-800 dark:text-gray-200 font-bold shadow-sm">
-          <li className="hover:scale-105 hover:text-bold hover:text-blue-900 dark:hover:text-emerald-600 duration-100">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="hover:scale-105 hover:text-bold hover:text-blue-900 dark:hover:text-emerald-600 duration-100">
-            <Link to="/todo">Todo</Link>
-          </li>
-          <li className="hover:scale-105 hover:text-bold hover:text-blue-900 dark:hover:text-emerald-600 duration-100">
-            <Link to="/note">Note</Link>
-          </li>
+          {navTitles.map(({ title, link }) => (
+            <li
+              key={link}
+              className="hover:scale-105 hover:text-bold hover:text-blue-900 dark:hover:text-emerald-600 duration-100"
+            >
+              <Link to={link}>{title}</Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>

@@ -18,16 +18,6 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
   const [description, setDescription] = useState<string>("");
   const [editDate, setEditDate] = useState<string>("Not edited yet!");
 
-  useEffect(() => {
-    if (editIndex !== -1) {
-      setTitle(notes[editIndex].title);
-      setDescription(notes[editIndex].description);
-    } else {
-      setTitle("");
-      setDescription("");
-    }
-  }, [editIndex, notes]);
-
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -37,6 +27,17 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
   ) => {
     setDescription(e.target.value);
   };
+
+  // Keeping track of the edit index to corresponding note from the array of notes and triggering a state change accordingly
+  useEffect(() => {
+    if (editIndex !== -1) {
+      setTitle(notes[editIndex].title);
+      setDescription(notes[editIndex].description);
+    } else {
+      setTitle("");
+      setDescription("");
+    }
+  }, [editIndex, notes]);
 
   const handleAddButtonClick = () => {
     if (editIndex === -1) {
@@ -70,6 +71,7 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
       }
     }
   };
+
 
   return (
     <div className="inputBox border border-blue-950 rounded-lg h-40 sm:h-44  w-52 sm:w-96 mx-auto flex flex-col shadow-xl justify-evenly dark:bg-slate-800">
