@@ -1,23 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Notes } from "../pages/Note";
 import { useTheme } from "./ThemeContext";
 
 interface NoteOperations {
   note: Notes;
+  notes: Notes[];
+  setNotes: React.Dispatch<React.SetStateAction<Notes[]>>;
   index: number;
-  toggleNote: (id: number) => void;
-  editNote: (index: number) => void;
-  deleteNote: (id: number) => void;
+  setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const NoteOperations: React.FC<NoteOperations> = ({
   note,
+  notes,
   index,
-  toggleNote,
-  editNote,
-  deleteNote,
+  setNotes,
+  setEditIndex,
 }) => {
   const { darkMode } = useTheme();
+  const [, setTitle] = useState<string>("");
+  const [, setDescription] = useState<string>("");
+
+  const editNote = (index: number) => {
+    setTitle(notes[index].title);
+    setDescription(notes[index].description);
+    setEditIndex(index);
+  };
+
+  const toggleNote = (id: number) => {
+    setNotes((prev) =>
+      prev.map((note) =>
+        note.id === id ? { ...note, done: !note.done } : note
+      )
+    );
+  };
+
+  const deleteNote = (id: number) => {
+    const filteredNotes = notes.filter((item) => item.id !== id);
+    setNotes(filteredNotes);
+    setTitle("");
+    setDescription("");
+  };
 
   return (
     <li key={index}>

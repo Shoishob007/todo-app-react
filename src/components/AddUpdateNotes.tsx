@@ -1,27 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Notes } from "../pages/Note";
 
 interface AddUpdateNoteProps {
-  onAddNote: (title: string, description: string) => void;
-  onUpdateNote: (updatedTitle: string, updatedDescription: string) => void;
+  notes: Notes[];
+  setNotes: React.Dispatch<React.SetStateAction<Notes[]>>;
   editIndex: number;
-  title: string;
-  description: string;
+  setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
-  onAddNote,
-  onUpdateNote,
+  notes,
+  setNotes,
   editIndex,
-  title: initialTitle,
-  description: initialDescription,
+  setEditIndex,
 }) => {
-  const [title, setTitle] = useState<string>(initialTitle);
-  const [description, setDescription] = useState<string>(initialDescription);
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [editDate, setEditDate] = useState<string>("Not edited yet!");
 
   useEffect(() => {
-    setTitle(initialTitle);
-    setDescription(initialDescription);
-  }, [initialTitle, initialDescription]);
+    if (editIndex !== -1) {
+      setTitle(notes[editIndex].title);
+      setDescription(notes[editIndex].description);
+    } else {
+      setTitle("");
+      setDescription("");
+    }
+  }, [editIndex, notes]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -35,12 +40,35 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
 
   const handleAddButtonClick = () => {
     if (editIndex === -1) {
-      onAddNote(title, description);
+      if (title.trim() !== "" && description.trim() !== "") {
+        setNotes([
+          ...notes,
+          {
+            id: Date.now(),
+            title: title.trim(),
+            description: description.trim(),
+            editDate: editDate,
+          },
+        ]);
+        setTitle("");
+        setDescription("");
+      }
     } else {
-      onUpdateNote(title, description);
+      if (title.trim() !== "" && description.trim() !== "") {
+        const updatedNotes = [...notes];
+        const newEditDate = new Date().toLocaleDateString("en-GB");
+        updatedNotes[editIndex].title = title.trim();
+        updatedNotes[editIndex].description = description.trim();
+        if (editIndex !== -1) {
+          updatedNotes[editIndex].editDate = newEditDate;
+        }
+        setEditDate(newEditDate);
+        setNotes(updatedNotes);
+        setEditIndex(-1);
+        setTitle("");
+        setDescription("");
+      }
     }
-    setTitle("");
-    setDescription("");
   };
 
   return (

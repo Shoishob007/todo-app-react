@@ -1,38 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { useTheme } from "./ThemeContext";
+import { Todos } from "../pages/Todo";
 
 interface AddUpdateTodoProps {
-  onAddTodo: (todo: string) => void;
-  onUpdateTodo: (updatedValue: string) => void;
+  todos: Todos[];
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>;
   editIndex: number;
-  input: string;
+  setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
-  onAddTodo,
-  onUpdateTodo,
+  todos,
+  setTodos,
   editIndex,
-  input,
+  setEditIndex,
 }) => {
-  const [value, setValue] = useState<string>(input);
+  const [input, setInput] = useState<string>("");
   const { darkMode } = useTheme();
 
-  useEffect(() => {
-    setValue(input);
-  }, [input]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setInput(e.target.value);
   };
 
   const handleButtonClick = () => {
     if (editIndex === -1) {
-      onAddTodo(value);
+      if (input.trim() !== "") {
+        setTodos([
+          ...todos,
+          { id: Math.random(), todo: input.trim(), done: false },
+        ]);
+        setInput("");
+      }
     } else {
-      onUpdateTodo(value);
+      if (input.trim() !== "") {
+        const updatedTodos = [...todos];
+        updatedTodos[editIndex].todo = input.trim();
+        setTodos(updatedTodos);
+        setEditIndex(-1);
+        setInput("");
+      }
     }
-    setValue("");
   };
+
+  useEffect(() => {
+    if (editIndex !== -1) {
+      setInput(todos[editIndex].todo);
+    } else {
+      setInput("");
+    }
+  }, [editIndex, todos]);
 
   return (
     <div className="w-full flex gap-2 sm:gap-3">
@@ -42,7 +58,7 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
         required
         type="text"
         name="search"
-        value={value}
+        value={input}
         onChange={handleChange}
       />
       <button

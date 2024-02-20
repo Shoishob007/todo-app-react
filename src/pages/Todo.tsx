@@ -1,9 +1,8 @@
-// eslint-disable-next-line no-unused-vars
-import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import TodoOperations from "../components/TodoOperations";
-import AddUpdateTodo from "../components/AddUpdateTodo";
+import { useState, useEffect } from "react";
 import { useTheme } from "../components/ThemeContext";
+import AddUpdateTodo from "../components/AddUpdateTodo";
+import Navbar from "../components/Navbar";
+import TodoOperations from "../components/SaveAndDeleteTodo";
 
 export interface Todos {
   id: number;
@@ -12,7 +11,6 @@ export interface Todos {
 }
 
 export default function Todo() {
-  const [input, setInput] = useState<string>("");
   const [todos, setTodos] = useState<Todos[]>(
     JSON.parse(localStorage.getItem("todos") || "[]")
   );
@@ -27,43 +25,8 @@ export default function Todo() {
     }
   }, [darkMode]);
 
-  const addTodo = (value: string) => {
-    if (value != "") {
-      setTodos([...todos, { id: Math.random(), todo: value }]);
-    }
-  };
-
-  const setToggle = (id: number) => {
-    setTodos((previous) =>
-      previous.map((todo) =>
-        todo.id === id ? { ...todo, done: !todo.done } : todo
-      )
-    );
-  };
-
-  const setEdit = (index: number) => {
-    console.log(index);
-    setInput(todos[index].todo);
-    setEditIndex(index);
-  };
-
-  const updateTodo = (updatedValue: string) => {
-    const updatedTodos = [...todos];
-    updatedTodos[editIndex].todo = updatedValue;
-    setTodos(updatedTodos);
-    setEditIndex(-1);
-    setInput("");
-  };
-
-  const deleteTodo = (id: number) => {
-    const filteredTodo = todos.filter((item) => item.id !== id);
-    setTodos(filteredTodo);
-    setInput("");
-  };
-
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
-    setInput("");
   }, [todos]);
 
   return (
@@ -78,10 +41,10 @@ export default function Todo() {
         </p>
         <div className="w-full flex gap-2 sm:gap-3 ">
           <AddUpdateTodo
-            input={input}
+            todos={todos}
+            setTodos={setTodos}
             editIndex={editIndex}
-            onAddTodo={addTodo}
-            onUpdateTodo={updateTodo}
+            setEditIndex={setEditIndex}
           />
         </div>
       </div>
@@ -97,9 +60,9 @@ export default function Todo() {
                   key={index}
                   todo={todo}
                   index={index}
-                  setToggle={setToggle}
-                  setEdit={setEdit}
-                  deleteTodo={deleteTodo}
+                  todos={todos}
+                  setTodos={setTodos}
+                  setEditIndex={setEditIndex}
                 />
               ))
             ) : (

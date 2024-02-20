@@ -2,22 +2,37 @@ import React from "react";
 import { Todos } from "../pages/Todo";
 import { useTheme } from "./ThemeContext";
 
-interface TodooperationProps {
+interface TodoOperationProps {
   todo: Todos;
   index: number;
-  setToggle: (id: number) => void;
-  setEdit: (index: number) => void;
-  deleteTodo: (id: number) => void;
+  todos: Todos[];
+  setTodos: React.Dispatch<React.SetStateAction<Todos[]>>;
+  setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const TodoOperations: React.FC<TodooperationProps> = ({
+const TodoOperations: React.FC<TodoOperationProps> = ({
   todo,
   index,
-  setToggle,
-  setEdit,
-  deleteTodo,
+  setTodos,
+  setEditIndex
 }) => {
   const { darkMode } = useTheme();
+
+  const setToggle = (id: number) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((prevTodo) =>
+        prevTodo.id === id ? { ...prevTodo, done: !prevTodo.done } : prevTodo
+      )
+    );
+  };
+
+  const setEdit = (index: number) => {
+    setEditIndex(index);
+  };
+
+  const deleteTodo = (id: number) => {
+    setTodos((prevTodos) => prevTodos.filter((prevTodo) => prevTodo.id !== id));
+  };
 
   return (
     <li className="flex items-center justify-between py-5 gap-1 sm:gap-2 ">
