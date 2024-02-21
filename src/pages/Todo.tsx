@@ -3,7 +3,7 @@ import { useTheme } from "../components/ThemeContext";
 import AddUpdateTodo from "../components/AddUpdateTodo";
 import Navbar from "../components/Navbar";
 import SaveAndDeleteTodo from "../components/SaveAndDeleteTodo";
-import { ToggleLightTheme, ToggleDarkTheme } from "../components/TodoSvg";
+import { ToggleLightTheme, ToggleDarkTheme } from "../components/ThemeIcon";
 
 export interface Todos {
   id: number;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Notes } from "../pages/Note";
+import { AddNoteButton, UpdateNoteButton } from "./AddUpdateNoteButton";
 
 interface AddUpdateNoteProps {
   notes: Notes[];
@@ -72,7 +73,6 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
     }
   };
 
-
   return (
     <div className="inputBox border border-blue-950 rounded-lg h-40 sm:h-44  w-52 sm:w-96 mx-auto flex flex-col shadow-xl justify-evenly dark:bg-slate-800">
       <input
@@ -89,19 +89,9 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
         onChange={handleDescriptionChange}
       ></textarea>
       {editIndex === -1 ? (
-        <button
-          className=" w-16 sm:w-24 h-7 sm:h-8 rounded-lg text-white bg-emerald-600 dark:bg-teal-800 hover:bg-blue-900 dark:hover:bg-blue-900 hover:scale-105 duration-200 font-light sm:font-md mx-auto "
-          onClick={handleAddButtonClick}
-        >
-          Save
-        </button>
+        <AddNoteButton handleAddButtonClick={handleAddButtonClick} />
       ) : (
-        <button
-          className="w-16 sm:w-24 h-7 sm:h-8 rounded-lg text-white bg-emerald-600 hover:scale-105 hover:bg-blue-900 duration-200 font-light sm:font-md mx-auto "
-          onClick={handleAddButtonClick}
-        >
-          Save Edits
-        </button>
+        <UpdateNoteButton handleAddButtonClick={handleAddButtonClick}/>
       )}
     </div>
   );

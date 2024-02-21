@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import SaveDeleteNotes from "../components/SaveAndDeleteNote";
 import AddUpdateNotes from "../components/AddUpdateNotes";
 import { useTheme } from "../components/ThemeContext";
-import { ToggleLightTheme, ToggleDarkTheme } from "../components/TodoSvg";
+import { ToggleLightTheme, ToggleDarkTheme } from "../components/ThemeIcon";
 
 export interface Notes {
   id: number;
