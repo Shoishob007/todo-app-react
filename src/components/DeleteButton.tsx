@@ -2,10 +2,6 @@ interface DeleteButtonProps {
   icon: JSX.Element;
   onClick: () => void;
   darkMode: boolean;
-  smH: number;
-  smW: number;
-  h: number;
-  w: number;
 }
 
 const DeleteButton: React.FC<DeleteButtonProps> = ({ icon, onClick }) => {
@@ -18,20 +14,14 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ icon, onClick }) => {
 
 export default DeleteButton;
 
-export const DeleteIcon: React.FC<{
-  darkMode: boolean;
-  smH: number;
-  smW: number;
-  h: number;
-  w: number;
-}> = ({ darkMode, smH, smW, h, w }) => (
+export const DeleteIcon: React.FC<{ darkMode: boolean }> = ({ darkMode }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`sm:w-${smW} sm:h-${smH} w-${w} h-${h} hover:text-red-700 hover:scale-105 duration-150 ${
+    className={`sm:w-5 sm:h-5 w-4 h-4 hover:text-red-700 hover:scale-105 duration-150 ${
       darkMode ? "text-slate-400" : "text-black"
     }`}
   >

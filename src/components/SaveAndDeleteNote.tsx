@@ -83,28 +83,16 @@ const SaveDeleteNotes: React.FC<SaveDeleteNotesProps> = ({
             </p>
           </div>
           <div>
-            <EditButton
-              smH={5}
-              smW={5}
-              h={4}
-              w={4}
-              darkMode={darkMode}
-              icon={
-                <EditIcon darkMode={darkMode} smH={5} smW={5} h={4} w={4} />
-              }
-              onClick={() => editNote(index)}
-            />
+          <EditButton
+          darkMode={darkMode}
+          icon={<EditIcon darkMode={darkMode} />}
+          onClick={() => editNote(index)}
+          />
             <DeleteButton
-              smH={5}
-              smW={5}
-              h={4}
-              w={4}
-              darkMode={darkMode}
-              icon={
-                <DeleteIcon darkMode={darkMode} smH={5} smW={5} h={4} w={4} />
-              }
-              onClick={() => deleteNote(note.id)}
-            />
+          darkMode={darkMode}
+          icon={<DeleteIcon darkMode={darkMode} />}
+          onClick={() => deleteNote(note.id)}
+          />
           </div>
         </span>
       </div>

@@ -17,7 +17,6 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
 }) => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [editDate, setEditDate] = useState<string>("Not edited yet!");
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -43,13 +42,14 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
   const handleAddButtonClick = () => {
     if (editIndex === -1) {
       if (title.trim() !== "" && description.trim() !== "") {
+        const newEditDate = "Not edited yet!";
         setNotes([
           ...notes,
           {
             id: Date.now(),
             title: title.trim(),
             description: description.trim(),
-            editDate: editDate,
+            editDate: newEditDate,
           },
         ]);
         setTitle("");
@@ -64,7 +64,6 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
         if (editIndex !== -1) {
           updatedNotes[editIndex].editDate = newEditDate;
         }
-        setEditDate(newEditDate);
         setNotes(updatedNotes);
         setEditIndex(-1);
         setTitle("");
@@ -91,7 +90,7 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
       {editIndex === -1 ? (
         <AddNoteButton handleAddButtonClick={handleAddButtonClick} />
       ) : (
-        <UpdateNoteButton handleAddButtonClick={handleAddButtonClick}/>
+        <UpdateNoteButton handleAddButtonClick={handleAddButtonClick} />
       )}
     </div>
   );

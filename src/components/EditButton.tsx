@@ -2,10 +2,6 @@ interface EditButtonProps {
   icon: JSX.Element;
   onClick: () => void;
   darkMode: boolean;
-  smH: number;
-  smW: number;
-  h: number;
-  w: number;
 }
 
 const EditButton: React.FC<EditButtonProps> = ({ icon, onClick }) => {
@@ -18,20 +14,14 @@ const EditButton: React.FC<EditButtonProps> = ({ icon, onClick }) => {
 
 export default EditButton;
 
-export const EditIcon: React.FC<{
-  darkMode: boolean;
-  smH: number;
-  smW: number;
-  h: number;
-  w: number;
-}> = ({ darkMode, smH, smW, h, w }) => (
+export const EditIcon: React.FC<{ darkMode: boolean }> = ({ darkMode }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className={`sm:w-${smW} sm:h-${smH} w-${w} h-${h} hover:text-blue-800 hover:scale-105 duration-150 ${
+    className={`sm:w-5 sm:h-5 w-4 h-4 hover:text-blue-800 hover:scale-105 duration-150 ${
       darkMode ? "text-slate-400" : "text-black"
     }`}
   >

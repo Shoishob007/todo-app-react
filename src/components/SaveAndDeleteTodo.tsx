@@ -55,23 +55,15 @@ export const SaveAndDeleteTodo: React.FC<SaveAndDeleteTodoProps> = ({
       </div>
       <div>
         <EditButton
-          smH={6}
-          smW={6}
-          h={5}
-          w={5}
           darkMode={darkMode}
-          icon={<EditIcon darkMode={darkMode} smH={6} smW={6} h={5} w={5} />}
+          icon={<EditIcon darkMode={darkMode} />}
           onClick={() => setEdit(index)}
         />
       </div>
       <div>
         <DeleteButton
-          smH={6}
-          smW={6}
-          h={5}
-          w={5}
           darkMode={darkMode}
-          icon={<DeleteIcon darkMode={darkMode} smH={6} smW={6} h={5} w={5} />}
+          icon={<DeleteIcon darkMode={darkMode} />}
           onClick={() => deleteTodo(todo.id)}
         />
       </div>
