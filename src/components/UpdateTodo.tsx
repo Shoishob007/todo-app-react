@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Todos } from "../pages/Todo";
-import { AddUpdateButton } from "./AddUpdateTodoButton";
+import { AddUpdateTodoButton } from "../icons/AddUpdateTodoButton";
 
 interface AddUpdateTodoProps {
   todos: Todos[];
@@ -9,7 +9,7 @@ interface AddUpdateTodoProps {
   setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
+const UpdateTodo: React.FC<AddUpdateTodoProps> = ({
   todos,
   setTodos,
   editIndex,
@@ -22,22 +22,12 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
   };
 
   const handleButtonClick = () => {
-    if (editIndex === -1) {
-      if (input.trim() !== "") {
-        setTodos([
-          ...todos,
-          { id: Math.random(), todo: input.trim(), done: false },
-        ]);
-        setInput("");
-      }
-    } else {
-      if (input.trim() !== "") {
-        const updatedTodos = [...todos];
-        updatedTodos[editIndex].todo = input.trim();
-        setTodos(updatedTodos);
-        setEditIndex(-1);
-        setInput("");
-      }
+    if (input.trim() !== "") {
+      const updatedTodos = [...todos];
+      updatedTodos[editIndex].todo = input.trim();
+      setTodos(updatedTodos);
+      setEditIndex(-1);
+      setInput("");
     }
   };
 
@@ -60,9 +50,9 @@ const AddUpdateTodo: React.FC<AddUpdateTodoProps> = ({
         value={input}
         onChange={handleChange}
       />
-      <AddUpdateButton handleButtonClick={handleButtonClick} />
+      <AddUpdateTodoButton handleButtonClick={handleButtonClick} />
     </div>
   );
 };
 
-export default AddUpdateTodo;
+export default UpdateTodo;

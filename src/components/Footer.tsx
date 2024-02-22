@@ -1,5 +1,5 @@
 import { FaLinkedinIn, FaGithub } from "react-icons/fa";
-import { useTheme } from "./ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 import { useEffect } from "react";
 
 const Footer = () => {

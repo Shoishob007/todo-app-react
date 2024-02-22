@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Notes } from "../pages/Note";
-import { useTheme } from "./ThemeContext";
-import SaveButton, { SaveIcon, UnsaveIcon } from "./SaveButton";
-import EditButton, { EditIcon } from "./EditButton";
-import DeleteButton, { DeleteIcon } from "./DeleteButton";
+import { useTheme } from "../context/ThemeContext";
+import SaveNote from "./SaveNote";
+import EditNote from "./EditNote";
+import DeleteNote from "./DeleteNote";
 
-export interface SaveDeleteNotesProps {
+export interface NoteBoxProps {
   note: Notes;
   notes: Notes[];
   setNotes: React.Dispatch<React.SetStateAction<Notes[]>>;
@@ -13,7 +13,7 @@ export interface SaveDeleteNotesProps {
   setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SaveDeleteNotes: React.FC<SaveDeleteNotesProps> = ({
+const NoteBox: React.FC<NoteBoxProps> = ({
   note,
   notes,
   index,
@@ -21,29 +21,6 @@ const SaveDeleteNotes: React.FC<SaveDeleteNotesProps> = ({
   setEditIndex,
 }) => {
   const { darkMode } = useTheme();
-  const [, setTitle] = useState<string>("");
-  const [, setDescription] = useState<string>("");
-
-  const editNote = (index: number) => {
-    setTitle(notes[index].title);
-    setDescription(notes[index].description);
-    setEditIndex(index);
-  };
-
-  const toggleNote = (id: number) => {
-    setNotes((prev) =>
-      prev.map((note) =>
-        note.id === id ? { ...note, done: !note.done } : note
-      )
-    );
-  };
-
-  const deleteNote = (id: number) => {
-    const filteredNotes = notes.filter((item) => item.id !== id);
-    setNotes(filteredNotes);
-    setTitle("");
-    setDescription("");
-  };
 
   return (
     <li key={index}>
@@ -62,11 +39,7 @@ const SaveDeleteNotes: React.FC<SaveDeleteNotesProps> = ({
           <p className="text-slate-600 sm:text-base dark:text-slate-300">
             {note.title}
           </p>
-          <SaveButton
-            icon={note.done ? <UnsaveIcon /> : <SaveIcon />}
-            color="#059669"
-            onClick={() => toggleNote(note.id)}
-          />
+          <SaveNote note={note} setNotes={setNotes} />
         </span>
         <span className="flex-grow p-2 overflow-hidden">
           <p className="text-slate-600 text-start sm:text-base dark:text-slate-300">
@@ -83,16 +56,8 @@ const SaveDeleteNotes: React.FC<SaveDeleteNotesProps> = ({
             </p>
           </div>
           <div>
-          <EditButton
-          darkMode={darkMode}
-          icon={<EditIcon darkMode={darkMode} />}
-          onClick={() => editNote(index)}
-          />
-            <DeleteButton
-          darkMode={darkMode}
-          icon={<DeleteIcon darkMode={darkMode} />}
-          onClick={() => deleteNote(note.id)}
-          />
+            <EditNote notes={notes} index={index} setEditIndex={setEditIndex} />
+            <DeleteNote note={note} notes={notes} setNotes={setNotes} />
           </div>
         </span>
       </div>
@@ -100,4 +65,4 @@ const SaveDeleteNotes: React.FC<SaveDeleteNotesProps> = ({
   );
 };
 
-export default SaveDeleteNotes;
+export default NoteBox;

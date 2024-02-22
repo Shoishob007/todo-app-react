@@ -1,10 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import SaveDeleteNotes from "../components/SaveAndDeleteNote";
-import AddUpdateNotes from "../components/AddUpdateNotes";
-import { useTheme } from "../components/ThemeContext";
-import { ToggleLightTheme, ToggleDarkTheme } from "../components/ThemeIcon";
+import NoteBox from "../components/NoteBox";
+import { useTheme } from "../context/ThemeContext";
+import { ToggleLightTheme, ToggleDarkTheme } from "../icons/ThemeIcon";
+import AddNote from "../components/AddNote";
+import UpdateNote from "../components/UpdateNote";
 
 export interface Notes {
   id: number;
@@ -39,12 +40,18 @@ export default function Note() {
       <p className="pb-4 text-xl sm:text-2xl mx-auto font-bold underline underline-offset-4 dark:text-slate-300">
         Add Your Note
       </p>
-      <AddUpdateNotes
-        notes={notes}
-        setNotes={setNotes}
-        editIndex={editIndex}
-        setEditIndex={setEditIndex}
-      />
+      <div className="inputBox border border-blue-950 rounded-lg h-40 sm:h-44  w-52 sm:w-96 mx-auto flex flex-col shadow-xl justify-evenly dark:bg-slate-800">
+        {editIndex == -1 ? (
+          <AddNote notes={notes} setNotes={setNotes} editIndex={editIndex} />
+        ) : (
+          <UpdateNote
+            notes={notes}
+            setNotes={setNotes}
+            editIndex={editIndex}
+            setEditIndex={setEditIndex}
+          />
+        )}
+      </div>
       <div className="flex flex-col font-medium p-2 sm:p-4">
         <p className="py-2 text-xl sm:text-2xl mx-auto  font-bold underline underline-offset-4 dark:text-slate-300">
           My Notes
@@ -53,7 +60,7 @@ export default function Note() {
           <ul className=" flex flex-wrap justify-center items-center gap-4 sm:gap-8">
             {notes.length > 0 ? (
               notes.map((note, index) => (
-                <SaveDeleteNotes
+                <NoteBox
                   key={index}
                   note={note}
                   index={index}

@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Todo from "./pages/Todo";
 import Note from "./pages/Note";
 import Footer from "./components/Footer";
-import { ThemeProvider } from "./components/ThemeContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import "./index.css";
 
 export default function App() {

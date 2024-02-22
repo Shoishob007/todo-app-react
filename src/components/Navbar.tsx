@@ -1,7 +1,7 @@
 // Navbar.jsx
 import { Link, useNavigate } from "react-router-dom";
 import logoImage from "../assets/Logo.svg";
-import { useTheme } from "./ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 import { useEffect } from "react";
 import { navTitles } from "./NavItems";
 

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Notes } from "../pages/Note";
-import { AddNoteButton, UpdateNoteButton } from "./AddUpdateNoteButton";
+import { UpdateNoteButton } from "../icons/AddUpdateNoteButton";
 
-interface AddUpdateNoteProps {
+interface UpdateNoteProps {
   notes: Notes[];
   setNotes: React.Dispatch<React.SetStateAction<Notes[]>>;
   editIndex: number;
   setEditIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
+const UpdateNote: React.FC<UpdateNoteProps> = ({
   notes,
   setNotes,
   editIndex,
@@ -40,35 +40,18 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
   }, [editIndex, notes]);
 
   const handleAddButtonClick = () => {
-    if (editIndex === -1) {
-      if (title.trim() !== "" && description.trim() !== "") {
-        const newEditDate = "Not edited yet!";
-        setNotes([
-          ...notes,
-          {
-            id: Date.now(),
-            title: title.trim(),
-            description: description.trim(),
-            editDate: newEditDate,
-          },
-        ]);
-        setTitle("");
-        setDescription("");
+    if (title.trim() !== "" && description.trim() !== "") {
+      const updatedNotes = [...notes];
+      const newEditDate = new Date().toLocaleDateString("en-GB");
+      updatedNotes[editIndex].title = title.trim();
+      updatedNotes[editIndex].description = description.trim();
+      if (editIndex !== -1) {
+        updatedNotes[editIndex].editDate = newEditDate;
       }
-    } else {
-      if (title.trim() !== "" && description.trim() !== "") {
-        const updatedNotes = [...notes];
-        const newEditDate = new Date().toLocaleDateString("en-GB");
-        updatedNotes[editIndex].title = title.trim();
-        updatedNotes[editIndex].description = description.trim();
-        if (editIndex !== -1) {
-          updatedNotes[editIndex].editDate = newEditDate;
-        }
-        setNotes(updatedNotes);
-        setEditIndex(-1);
-        setTitle("");
-        setDescription("");
-      }
+      setNotes(updatedNotes);
+      setEditIndex(-1);
+      setTitle("");
+      setDescription("");
     }
   };
 
@@ -87,13 +70,9 @@ const AddUpdateNotes: React.FC<AddUpdateNoteProps> = ({
         value={description}
         onChange={handleDescriptionChange}
       ></textarea>
-      {editIndex === -1 ? (
-        <AddNoteButton handleAddButtonClick={handleAddButtonClick} />
-      ) : (
-        <UpdateNoteButton handleAddButtonClick={handleAddButtonClick} />
-      )}
+      <UpdateNoteButton handleAddButtonClick={handleAddButtonClick} />
     </div>
   );
 };
 
-export default AddUpdateNotes;
+export default UpdateNote;

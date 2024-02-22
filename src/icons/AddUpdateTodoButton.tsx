@@ -1,10 +1,10 @@
-import { useTheme } from "./ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 
 interface AddUpdateTodoButtonProps {
   handleButtonClick: () => void;
 }
 
-export const AddUpdateButton: React.FC<AddUpdateTodoButtonProps> = ({
+export const AddUpdateTodoButton: React.FC<AddUpdateTodoButtonProps> = ({
   handleButtonClick,
 }) => {
   const { darkMode } = useTheme();

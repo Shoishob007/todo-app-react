@@ -3,8 +3,8 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import HeroImage from "../assets/Todo.svg";
-import { useTheme } from "../components/ThemeContext";
-import { ToggleLightTheme, ToggleDarkTheme } from "../components/ThemeIcon";
+import { useTheme } from "../context/ThemeContext";
+import { ToggleLightTheme, ToggleDarkTheme } from "../icons/ThemeIcon";
 import { useEffect } from "react";
 
 function Home() {

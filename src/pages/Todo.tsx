@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useTheme } from "../components/ThemeContext";
-import AddUpdateTodo from "../components/AddUpdateTodo";
+import { useTheme } from "../context/ThemeContext";
+import AddTodo from "../components/AddTodo";
+import UpdateTodo from "../components/UpdateTodo";
 import Navbar from "../components/Navbar";
-import SaveAndDeleteTodo from "../components/SaveAndDeleteTodo";
-import { ToggleLightTheme, ToggleDarkTheme } from "../components/ThemeIcon";
+import TodoBox from "../components/TodoBox";
+import { ToggleLightTheme, ToggleDarkTheme } from "../icons/ThemeIcon";
 
 export interface Todos {
   id: number;
@@ -41,12 +42,21 @@ export default function Todo() {
           Add Todo
         </p>
         <div className="w-full flex gap-2 sm:gap-3 ">
-          <AddUpdateTodo
-            todos={todos}
-            setTodos={setTodos}
-            editIndex={editIndex}
-            setEditIndex={setEditIndex}
-          />
+          {editIndex == -1 ? (
+            <AddTodo
+              todos={todos}
+              setTodos={setTodos}
+              editIndex={editIndex}
+              setEditIndex={setEditIndex}
+            />
+          ) : (
+            <UpdateTodo
+              todos={todos}
+              setTodos={setTodos}
+              editIndex={editIndex}
+              setEditIndex={setEditIndex}
+            />
+          )}
         </div>
       </div>
       <div className="flex flex-col mx-auto sm:w-80">
@@ -57,11 +67,10 @@ export default function Todo() {
           <ul>
             {todos.length > 0 ? (
               todos.map((todo, index) => (
-                <SaveAndDeleteTodo
+                <TodoBox
                   key={index}
                   todo={todo}
                   index={index}
-                  todos={todos}
                   setTodos={setTodos}
                   setEditIndex={setEditIndex}
                 />
